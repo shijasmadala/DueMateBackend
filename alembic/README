@@ -1,0 +1,5 @@
+Alembic stores one Python file per database schema change in `versions/`.
+
+- `alembic revision --autogenerate -m "message"` drafts a new file from the SQLAlchemy models.
+- Read that file before applying it.
+- `alembic upgrade head` applies pending revisions to PostgreSQL.
