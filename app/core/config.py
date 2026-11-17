@@ -2,7 +2,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    """Runtime settings loaded from environment variables or a local .env file."""
+    """Runtime settings loaded from environment variables or .env."""
 
     model_config = SettingsConfigDict(
         env_file=".env",
@@ -12,6 +12,10 @@ class Settings(BaseSettings):
 
     database_url: str
     db_echo: bool = False
+
+    jwt_secret_key: str 
+    jwt_algorithm: str = "HS256"
+    access_token_expire_minutes: int = 30
 
 
 settings = Settings()

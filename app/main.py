@@ -1,10 +1,9 @@
 
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, HTTPException
 from sqlalchemy import text
-from sqlalchemy.orm import Session
 
 from app.api.v1 import api_router
-from app.core.database import get_db
+from app.core.database import DbSession
 
 app = FastAPI(
     title="DueMate API",
@@ -21,7 +20,7 @@ def health() -> dict[str, str]:
 
 
 @app.get("/health/db")
-def database_health(db: Session = Depends(get_db)) -> dict[str, str]:
+def database_health(db: DbSession) -> dict[str, str]:
     try:
         db.execute(text("SELECT 1"))
         return {
